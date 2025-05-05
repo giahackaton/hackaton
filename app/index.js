@@ -1,13 +1,14 @@
 // Servidor WebSocket en Replit para recibir audio, transcribir con Whisper y responder con ChatGPT
 
 const express = require("express");
-const dom = require("dom");
+const env = require("dotenv");
 const { WebSocketServer } = require("ws");
 const axios = require("axios");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const { execSync } = require("child_process");
-require('dotenv').config(); 
+env.config({ path: "../.env" });
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
