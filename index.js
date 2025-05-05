@@ -1,16 +1,17 @@
 // Servidor WebSocket en Replit para recibir audio, transcribir con Whisper y responder con ChatGPT
 
 const express = require("express");
+const dom = require("dom");
 const { WebSocketServer } = require("ws");
 const axios = require("axios");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const { execSync } = require("child_process");
+require('dotenv').config(); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const OPENAI_API_KEY =
-  "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"; // Reemplaza con tu clave
+const API_KEY_OPENAI = process.env.API_KEY_OPENAI; // Reemplaza con tu clave
 
 const server = app.listen(PORT, () => {
   console.log("🌐 Servidor HTTP activo en puerto " + PORT);
@@ -43,7 +44,7 @@ wss.on("connection", (ws) => {
           formData,
           {
             headers: {
-              Authorization: `Bearer ${OPENAI_API_KEY}`,
+              Authorization: `Bearer ${API_KEY_OPENAI}`,
               ...formData.getHeaders(),
             },
           },
@@ -67,7 +68,7 @@ wss.on("connection", (ws) => {
           },
           {
             headers: {
-              Authorization: `Bearer ${OPENAI_API_KEY}`,
+              Authorization: `Bearer ${API_KEY_OPENAI}`,
             },
           },
         );
