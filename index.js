@@ -7,7 +7,7 @@ const axios = require("axios");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const { execSync } = require("child_process");
-env.config({ path: "../.env" });
+env.config({ path: ".env" });
 
 
 const app = express();
